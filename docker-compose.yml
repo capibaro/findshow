@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+  se:
+    image: elasticsearch:5.4.0
+    container_name: elasticsearch
+    networks: 
+      - db_network
+    ports: 
+      - 9200:9200
+    environment: 
+      discovery.type: single-node
+    
+  web:
+    build: .
+    container_name: django
+    command: bash -c "
+      python3 manage.py makemigrations 
+      && python3 manage.py migrate 
+      && gunicorn findshow.wsgi:application --bind 0.0.0.0:8000"
+    networks: 
+      - db_network
+    expose: 
+      - "8000"
+    volumes: 
+      - ./:/code/
+    environment: 
+      - SECRET_KEY=${SECRET_KEY}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    depends_on: 
+      - se
+      
+  nginx:
+    image: nginx
+    container_name: nginx
+    networks: 
+      - db_network
+    ports: 
+      - 80:80
+    volumes: 
+      - ./nginx:/etc/nginx/conf.d
+    command: nginx -g 'daemon off;'
+    depends_on: 
+      - web
+
+networks: 
+  db_network:
+    external: true

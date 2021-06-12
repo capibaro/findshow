@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://showsearch-1304623431.cos.ap-guangzhou.myqcloud.com/favicon.ico">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css">
+    <title>FindShow</title>
+</head>
+
+<body style="background-color: wheat;">
+    {% if not query %}
+    <div class="card" style="width: 90%; margin-left: 5%; margin-top: 1%;">
+        <div id="photoCarousel" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-mdb-target="#photoCarousel" data-mdb-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-mdb-target="#photoCarousel" data-mdb-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-mdb-target="#photoCarousel" data-mdb-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-mdb-target="#photoCarousel" data-mdb-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-mdb-target="#photoCarousel" data-mdb-slide-to="4"
+                    aria-label="Slide 5"></button>
+                <button type="button" data-mdb-target="#photoCarousel" data-mdb-slide-to="5"
+                    aria-label="Slide 6"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://showsearch-1304623431.cos.ap-guangzhou.myqcloud.com/cq-1.jpg" class="d-block w-100"
+                        alt="..." />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://showsearch-1304623431.cos.ap-guangzhou.myqcloud.com/cq-2.jpg" class="d-block w-100"
+                        alt="..." />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://showsearch-1304623431.cos.ap-guangzhou.myqcloud.com/cq-3.jpg" class="d-block w-100"
+                        alt="..." />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://showsearch-1304623431.cos.ap-guangzhou.myqcloud.com/st-1.jpg" class="d-block w-100"
+                        alt="..." />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://showsearch-1304623431.cos.ap-guangzhou.myqcloud.com/st-2.jpg" class="d-block w-100"
+                        alt="..." />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://showsearch-1304623431.cos.ap-guangzhou.myqcloud.com/st-3.jpg" class="d-block w-100"
+                        alt="..." />
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    {% endif %}
+
+    <div class="card" style="width: 90%; margin-left: 5%; margin-top: 1%;">
+        <div class="card-body">
+            <form method="get" action=".">
+                <div class="d-flex p-1">
+                    <div class="p-1">
+                        <a href="http://www.findshow.xyz" class="btn btn-link">
+                            FindShow
+                        </a>
+                    </div>
+                    <div class="flex-grow-1 p-1">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="音乐人，城市，场馆" name="q" autocomplete="off"/>
+                            <button class="btn btn-primary" type="submit">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if query %}
+    {% for result in page.object_list %}
+    <div class="card" style="width: 90%; margin-left: 5%; margin-top: 1%;">
+        <div class="card-body">
+            <p class="card-title">
+                <a class="card-link" href="{{ result.object.url }}" target="_blank">{{ result.object.title }}</a>
+            </p>
+            <p class="card-text">{{ result.object.date }}</p>
+            <p class="card-text">{{ result.object.artist }}</p>
+            <p class="card-text">地点：{{ result.object.venue }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            <p class="card-text">
+                来源：{{ result.object.source }}
+            </p>
+        </div>
+    </div>
+    {% empty %}
+    <div class="card" style="width: 90%; margin-left: 5%; margin-top: 1%;">
+        <div class="card-footer">
+            <p class="card-text">没有找到{{query}}的演出</p>
+        </div>
+    </div>
+    {% endfor %}
+    {% if page.has_previous or page.has_next %}
+    <div class="card" style="width: 90%; margin-left: 5%; margin-top: 1%;">
+        <div class="card-footer text-center">
+            {% if page.has_previous %}
+            <a class="card-link" href="?q={{ query }}&page={{ page.previous_page_number }}">
+                {% endif%}
+                « Previous
+                {% if page.has_previous %}
+            </a>
+            {% endif %}
+            |
+            {% if page.has_next %}
+            <a class="card-link" href="?q={{ query }}&page={{ page.next_page_number }}">
+                {% endif%}
+                Next »
+                {% if page.has_next %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    <footer class="bg-light text-center text-lg-start">
+        <div class="text-center p-2" style="background-color: wheat">
+            © 2021 Copyright
+            <a class="text-dark" href="https://github.com/maotouyingxia">maotouyingxia</a>
+            |
+            <a class="text-dark" href="http://beian.miit.gov.cn">渝ICP备2021000257号</a>
+        </div>
+    </footer>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"></script>
+</body>
+
+</html>

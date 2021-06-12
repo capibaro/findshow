@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from haystack.views import SearchView
+from haystack.query import SearchQuerySet
+
+sqs = SearchQuerySet().order_by('time')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', SearchView(searchqueryset=sqs),),
 ]
