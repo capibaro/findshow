@@ -1,4 +1,4 @@
-from django.utils import timezone
+from datetime import datetime, timedelta
 from haystack import indexes
 from search.models import Show
 
@@ -11,4 +11,6 @@ class ShowIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
-        return self.get_model().objects.filter(time__gte=timezone.now())
+        utc = datetime.now()
+        ctc = utc + timedelta(hours=8)
+        return self.get_model().objects.filter(time__gte=ctc)
