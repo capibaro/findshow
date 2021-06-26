@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['web']
 # Application definition
 
 INSTALLED_APPS = [
+    'search.apps.SearchConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'haystack',
-    'search',
 ]
 
 MIDDLEWARE = [
