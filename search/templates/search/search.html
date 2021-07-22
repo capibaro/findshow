@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css">
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcdn.net/ajax/libs/mdb-ui-kit/3.9.0/mdb.min.css">
     <title>FindShow</title>
 </head>
 
@@ -87,8 +87,10 @@
             <p class="card-title">
                 <a class="card-link" href="{{ result.object.url }}" target="_blank">{{ result.object.title }}</a>
             </p>
-            <p class="card-text">{{ result.object.date }}</p>
-            <p class="card-text">{{ result.object.artist }}</p>
+            <p class="card-text">时间：{{ result.object.date }}</p>
+            {% if result.object.artist %}
+            <p class="card-text">艺人：{{ result.object.artist }}</p>
+            {% endif %}
             <p class="card-text">地点：{{ result.object.venue }}</p>
         </div>
         <div class="card-footer text-muted">
@@ -135,8 +137,8 @@
         </div>
     </footer>
     <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"></script>
+        src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/mdb-ui-kit/3.9.0/mdb.min.js"></script>
 </body>
 
 </html>
