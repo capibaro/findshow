@@ -1,6 +1,6 @@
 # FINDSHOW
 
-[FindShow](http://www.findshow.xyz/)是一个演出搜索网站，旨在通过[ShowSpider](https://github.com/maotouyingxia/ShowSpider)收集主流票务网站的演出信息，帮助大家根据音乐人、场馆、城市快速找到自己感兴趣的演出。
+FindShow ([www.findshow.xyz](http://www.findshow.xyz/)) 是一个演出搜索网站，旨在通过 [ShowSpider](https://github.com/maotouyingxia/ShowSpider) 收集主流票务网站的演出信息，帮助大家根据音乐人、场馆、城市快速找到自己感兴趣的演出。
 
 ## Requirement
 
