@@ -9,6 +9,7 @@ class Show(models.Model):
     time = models.DateTimeField()
     venue = models.TextField()
     artist = models.TextField()
+    post = models.URLField(max_length=255)
     source = models.CharField(max_length=10)
 
     def __unicode__(self):
